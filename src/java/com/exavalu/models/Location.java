@@ -146,6 +146,7 @@ public class Location extends ActionSupport implements ApplicationAware, Session
             ArrayList stateList =  LocationService. getAllStates(this.countryId);
              sessionMap.put("StateList",stateList );
              sessionMap.put("User", this); 
+             result="STATELIST";
              
         }
 

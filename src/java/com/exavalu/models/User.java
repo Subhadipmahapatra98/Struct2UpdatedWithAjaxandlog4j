@@ -19,23 +19,21 @@ import org.apache.struts2.interceptor.SessionAware;
 /**
  *
  * @author Avijit
- */     
-public class User extends ActionSupport implements ApplicationAware, SessionAware, Serializable{
-    
+ */
+public class User extends ActionSupport implements ApplicationAware, SessionAware, Serializable {
+
     private int countryId;
     private String countryName;
     private int stateId;
     private String stateName;
     private int districtId;
-    private String districtName;   
-    
-    private String emailAddress,password,firstName,lastName;    
-    
-    
+    private String districtName;
+
+    private String emailAddress, password, firstName, lastName;
+
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
-
 
     @Override
     public void setApplication(Map<String, Object> application) {
@@ -47,57 +45,56 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         setSessionMap((SessionMap<String, Object>) (SessionMap) session);
     }
 
-    public String doSignUp() throws Exception {
-        String result = "FAILURE";
-        boolean success = LoginService.getInstance().doSignUp(this);
+//    public String doSignUp() throws Exception {
+//       
+//        boolean success = LoginService.getInstance().doSignUp(this);
+//
+//        if (success) {
+//            System.out.println("returning Success from doSignUp method");
+//            result = "SUCCESS";
+//        } else{
+//            System.out.println("returning Failure from doSignUp method");
+//        }
+//
+//     
+//        return result;
+//    }
+    public String doPreSignUp() throws Exception {
 
-        if (success) {
-            System.out.println("returning Success from doSignUp method");
-            result = "SUCCESS";
-        } else{
-            System.out.println("returning Failure from doSignUp method");
-        }
-
-     
-        return result;
-    }
-    
- public String doPreSignUp() throws Exception {
-     
         String result = "FAILURE";
-        
-        
+
         ArrayList countryList = LocationService.getAllCountries();
         sessionMap.put("CountryList", countryList);
-
-       
 
         if (this.countryId != 0) {
             ArrayList stateList = LocationService.getAllStates(this.countryId);
             sessionMap.put("StateList", stateList);
             sessionMap.put("User", this);
+            result = "STATELIST";
 
         }
-        
-         if ( this.countryId!=0 && this.stateId != 0 ) {
+
+        if (this.stateId != 0) {
             ArrayList districtList = LocationService.getAllDistricts(this.stateId);
             sessionMap.put("DistrictList", districtList);
             sessionMap.put("User", this);
+            result = "DISTRICT";
         }
-         
-         if ( this.countryId!=0 && this.stateId != 0 && this.districtId!=0) 
-         {
-             
-        boolean success = LoginService.getInstance().doSignUp(this);
 
-        if (success) {
-            System.out.println("returning Success from doSignUp method");
-            result = "SUCCESS";
-        } else {
-            System.out.println("returning Failure from doSignUp method");
+        if (this.countryId != 0 && this.stateId != 0 && this.districtId != 0 && this.emailAddress != null && this.password != null && this.firstName != null && this.lastName != null) 
+        {
+            
+            boolean success = LoginService.getInstance().doSignUp(this);
+            
+            if (success) {
+                System.out.println("returning Success from dopreSignUp method");
+                result = "SUCCESS";
+            } else {
+                System.out.println("returning Failure from dopreSignUp method");
+                result = "FAILURE";
+            }
+
         }
-             
-         }
 
         return result;
     }
@@ -274,4 +271,3 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
      * @return the stateId
      */
 }
-

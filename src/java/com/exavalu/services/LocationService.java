@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -44,7 +45,8 @@ public class LocationService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(LocationService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
 
         return countryList;
@@ -76,7 +78,8 @@ public class LocationService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(LocationService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
 
         return stateList;
@@ -107,7 +110,8 @@ public class LocationService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(LocationService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
 
         return districtList;

@@ -23,7 +23,6 @@
                     <li><a href="login.jsp" class="nav-link px-2 text-white">Add Employee</a></li>
                     <li><a href="login.jsp" class="nav-link px-2 text-white">Show Employee</a></li>
                     <li><a href="login.jsp" class="nav-link px-2 text-white">Search Employee</a></li>
-                    <li><a href="login.jsp" class="nav-link px-2 text-white">Edit Employee</a></li>
 <!--                    <li><a href="Location" class="nav-link px-2 text-white">Location</a></li>-->
 
                 </ul>

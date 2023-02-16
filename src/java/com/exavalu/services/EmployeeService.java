@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -66,7 +67,8 @@ public class EmployeeService {
 
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(EmployeeService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
         System.out.println("Number of employees = "+empList.size());
         return empList;
@@ -101,7 +103,8 @@ public class EmployeeService {
 
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(EmployeeService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
         return emp;
     }
@@ -146,7 +149,8 @@ public class EmployeeService {
 
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(EmployeeService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
         System.out.println("Number of employees = "+empList.size());
         
@@ -183,8 +187,9 @@ public class EmployeeService {
                     result = true;
                 }
 
-        } catch (SQLException e) {
-			e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger log = Logger.getLogger(EmployeeService.class.getName());
+            log.error("Error message -"+ex.getMessage());
             }
         return result;
   
@@ -223,7 +228,8 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           Logger log = Logger.getLogger(EmployeeService.class.getName());
+           log.error("Error message -"+ex.getMessage());
         }
         return result;
     }

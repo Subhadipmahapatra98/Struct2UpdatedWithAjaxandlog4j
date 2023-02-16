@@ -10,13 +10,19 @@ import com.exavalu.services.LoginService;
 import com.exavalu.services.RoleService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.JSONObject;
 
 /**
  *
@@ -68,7 +74,12 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
             sessionMap.put("empList", empList);
             
         } else {
+            String errorMsg ="Either Email Address or Password is Wrong...Please try once";
+            sessionMap.put("ErrorMsg", errorMsg);
+            Logger log = Logger.getLogger(LoginService.class.getName());
+            log.error(errorMsg);
             System.out.println("returning Failure from doLogin method");
+            
         }
 
         return result;
@@ -180,6 +191,7 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         return result;
     }
     
+         
 
     /**
      * @return the employeeId
@@ -188,6 +200,8 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         return employeeId;
     }
 
+    
+    
     /**
      * @param employeeId the employeeId to set
      */
