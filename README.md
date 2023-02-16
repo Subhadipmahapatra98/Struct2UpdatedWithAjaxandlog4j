@@ -1,0 +1,1 @@
+# Struct2UpdatedWithAjaxandlog4j
